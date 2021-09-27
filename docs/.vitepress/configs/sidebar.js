@@ -4,6 +4,7 @@ module.exports = {
   [getPath('/html/')]: getHtmlSidebar(),
   [getPath('/css/')]: getCssSidebar(),
   [getPath('/框架/')]: getLibrarySidebar(),
+  [getPath('/笔试、面试题汇总')]: getTestSidebar(),
 }
 
 function getHtmlSidebar() {
@@ -70,6 +71,20 @@ function getLibrarySidebar() {
         {
           text: 'webpack',
           link: '/框架/webpack'
+        },
+      ]
+    }
+  ]
+}
+
+function getTestSidebar() {
+  return [
+    {
+      text: '笔试、面试题汇总',
+      children: [
+        {
+          text: '4399',
+          link: '/笔试、面试题汇总/4399'
         },
       ]
     }
