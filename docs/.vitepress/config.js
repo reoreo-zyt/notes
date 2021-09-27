@@ -9,7 +9,7 @@ module.exports = {
   ],
   base: base,
   themeConfig: {
-    repo: 'reoreo-zyt',
+    repo: 'reoreo-zyt/notes',
     logo: '/logo.svg',
     docsDir: 'docs',
     docsBranch: 'master',

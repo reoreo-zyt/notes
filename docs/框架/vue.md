@@ -803,7 +803,7 @@ filters: {
 >
 > axios 进行 ajax 请求；
 
-![](../../.vuepress/public/images/lv-6.gif)
+![](/images/lv-6.gif)
 
 ## 2.5 事件监听
 
@@ -887,7 +887,7 @@ filters: {
 >
 > 用 `$event` 可以获取到浏览器参数的 `event`  对象；
 
-![](../../.vuepress/public/images/lv-14.jpg)
+![](/images/lv-14.jpg)
 
 ### 2.5.3 v-on 修饰符的使用
 
@@ -1009,7 +1009,7 @@ filters: {
 >
 > v-if 的值为 true 时，才渲染相应的 DOM
 
-![](../../.vuepress/public/images/lv15.jpg)
+![](/images/lv15.jpg)
 
 ### 2.6.2 v-if 和 v-else 的结合使用
 
@@ -1043,7 +1043,7 @@ filters: {
 >
 > v-else 在 isShow 为 false 时，会渲染 DOM
 
-![](../../.vuepress/public/images/lv16.jpg)
+![](/images/lv16.jpg)
 
 ### 2.6.3 v-if 和 v-else-if 和 v-else 的结合使用
 
@@ -1070,7 +1070,7 @@ filters: {
 >
 > v-else-if 其实就是另外的分支，跟原生的 js 条件判断一样；
 
-![](../../.vuepress/public/images/lv17.jpg)
+![](/images/lv17.jpg)
 
 ### 2.6.4 用户登录切换的案例
 
@@ -1143,7 +1143,7 @@ filters: {
     </script>
 ```
 
-![](../../.vuepress/public/images/lv-5.gif)
+![](/images/lv-5.gif)
 
 ### 2.6.6 v-show 的使用
 
@@ -1182,7 +1182,7 @@ filters: {
 >
 > v-show 条件为 false 时，元素还在，会添加行内样式：display:none
 
-![](../../.vuepress/public/images/lv19.jpg)
+![](/images/lv19.jpg)
 
 ## 2.7 循环遍历
 
@@ -1214,7 +1214,7 @@ filters: {
     </script>
 ```
 
-![](../../.vuepress/public/images/lv20.jpg)
+![](/images/lv20.jpg)
 
 ### 2.7.2 v-for 遍历对象
 
@@ -1251,7 +1251,7 @@ filters: {
     </script>
 ```
 
-![](../../.vuepress/public/images/lv21.jpg)
+![](/images/lv21.jpg)
 
 ### 2.7.3 v-for 添加 key
 
@@ -1360,7 +1360,7 @@ filters: {
 
 > v-model 实现了数据的双向绑定；
 
-![](../../.vuepress/public/images/lv-7.gif)
+![](/images/lv-7.gif)
 
 ### 2.8.2 v-model 的原理
 
@@ -1475,7 +1475,7 @@ filters: {
 >
 > 通过 `Vue.extend({template:``})` 创建组件构造器对象，再在 `Vue.component()` 里注册（全局）组件；
 
-![](../../.vuepress/public/images/lv22.jpg)
+![](/images/lv22.jpg)
 
 ### 3.1.2 全局组件和局部组件
 
@@ -1532,7 +1532,7 @@ filters: {
 >
 > 局部组件，只能在定义它的 Vue 实例下挂载，在 Vue 实例下用 `components` 挂载；
 
-![](../../.vuepress/public/images/lv23.jpg)
+![](/images/lv23.jpg)
 
 ### 3.1.3 父组件和子组件区别
 
@@ -1690,7 +1690,7 @@ filters: {
 >
 > 组件中的 data 必须是一个函数，返回一个对象；
 
-![](../../.vuepress/public/images/lv25.jpg)
+![](/images/lv25.jpg)
 
 ### 3.1.6 组件 data 数据的存放问题
 
@@ -1720,7 +1720,7 @@ filters: {
 
 > 组件里的 data 必须是一个函数，返回一个对象；
 
-![](../../.vuepress/public/images/lv26.jpg)
+![](/images/lv26.jpg)
 
 ### 3.1.7 组件的 data 必须是函数，返回一个对象
 
@@ -1784,7 +1784,7 @@ filters: {
 >
 > ​	每一个组件的数据都是独立的；
 
-![](../../.vuepress/public/images/lv-8.gif)
+![](/images/lv-8.gif)
 
 ## 3.2 组件通信
 
@@ -1885,7 +1885,7 @@ filters: {
 >
 > 默认值如果其类型是数组或者对象，则必须是一个函数； 
 
-![](../../.vuepress/public/images/lv27.jpg)
+![](/images/lv27.jpg)
 
 ### 3.2.2 props 的驼峰表示变量的问题
 
@@ -1949,7 +1949,7 @@ filters: {
   </script>
 ```
 
-![](../../.vuepress/public/images/lv28.jpg)
+![](/images/lv28.jpg)
 
 ### 3.2.3 子组件向父组件传递数据
 
@@ -2031,7 +2031,7 @@ filters: {
 >
 > 注意 `$emit` 自定义事件不能用驼峰变量，不过使用了 vue-cli 脚手架开发就可以了；
 
-![](../../.vuepress/public/images/lv-9.gif)
+![](/images/lv-9.gif)
 
 ### 3.2.4 父子组件通信（结合双向绑定）
 
@@ -2204,13 +2204,13 @@ filters: {
 >
 > `$children` 用于获取所有的组件；
 
-![](../../.vuepress/public/images/lv29.jpg)
+![](/images/lv29.jpg)
 
 ### 3.2.7 子访问父 `$parent` `$root`
 
 在开发里用得比较少，而且不建议这样用。
 
-![](../../.vuepress/public/images/lv30.jpg)
+![](/images/lv30.jpg)
 
 
 
@@ -2274,7 +2274,7 @@ filters: {
   </script>
 ```
 
-![](../../.vuepress/public/images/lv31.jpg)
+![](/images/lv31.jpg)
 
 > 抽取共性，不同的地方用插槽实现；
 
@@ -2338,7 +2338,7 @@ filters: {
   </script>
 ```
 
-![](../../.vuepress/public/images/lv32.jpg)
+![](/images/lv32.jpg)
 
 ### 3.3.3 编译作用域
 
@@ -2506,7 +2506,7 @@ filters: {
 
 > 改变挂载的组件，只需要用动态绑定 `component` 标签里中 `is` 指令的值即可；
 
-![](../../.vuepress/public/images/lv-10.gif)
+![](/images/lv-10.gif)
 
 #### 2. **直接绑定到组件对象上**
 
@@ -2555,7 +2555,7 @@ filters: {
 * `destroyed`
 * `errorCaptured`
 
-![](../../.vuepress/public/images/lv34.png)
+![](/images/lv34.png)
 
 [Vue的钩子函数[路由导航守卫、keep-alive、生命周期钩子]](https://juejin.cn/post/6844903641866829838#heading-11)
 
@@ -2620,7 +2620,7 @@ Vue 提供了一个内置组件 `keep-alive` 来**缓存组件内部状态，避
 * URL 的 hash 是通过锚点(#)，其本质上改变的是 window.location 的 href 属性。
 * 可以通过直接赋值 location.hash 来改变 href，但是页面并不会发生刷新。
 
-![](../../.vuepress/public/images/lv35.png)
+![](/images/lv35.png)
 
 > 通过改变 hash 改变 url，此时页面是未刷新的。
 >
