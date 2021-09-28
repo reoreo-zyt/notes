@@ -3,8 +3,10 @@ const { getPath } = require('./utils')
 module.exports = {
   [getPath('/html/')]: getHtmlSidebar(),
   [getPath('/css/')]: getCssSidebar(),
+  [getPath('/js/')]: getJsSidebar(),
   [getPath('/框架/')]: getLibrarySidebar(),
   [getPath('/笔试、面试题汇总')]: getTestSidebar(),
+  [getPath('/常见需求、demo')]: getDemoSidebar(),
 }
 
 function getHtmlSidebar() {
@@ -59,6 +61,20 @@ function getCssSidebar() {
   ]
 }
 
+function getJsSidebar() {
+  return [
+    {
+      text: 'js',
+      children: [
+        {
+          text: 'var，let，const的区别是什么',
+          link: '/js/var，let，const的区别是什么'
+        },
+      ]
+    }
+  ]
+}
+
 function getLibrarySidebar() {
   return [
     {
@@ -85,6 +101,20 @@ function getTestSidebar() {
         {
           text: '4399',
           link: '/笔试、面试题汇总/4399'
+        },
+      ]
+    }
+  ]
+}
+
+function getTestSidebar() {
+  return [
+    {
+      text: '常见需求、demo',
+      children: [
+        {
+          text: '表头固定、内容滚动',
+          link: '/常见需求、demo/表头固定、内容滚动'
         },
       ]
     }
