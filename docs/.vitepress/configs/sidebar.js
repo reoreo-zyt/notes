@@ -107,7 +107,7 @@ function getTestSidebar() {
   ]
 }
 
-function getTestSidebar() {
+function getDemoSidebar() {
   return [
     {
       text: '常见需求、demo',
