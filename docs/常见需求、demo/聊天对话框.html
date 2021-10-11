@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .wrap {
+            width: 800px;
+            /*height: 1500px;*/
+            border: 3px solid;
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+
+        textarea {
+            display: block;
+            width: 90%;
+            height: 300px;
+            border: 5px solid pink;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        input[type="button"] {
+            display: block;
+            background-color: pink;
+            width: 80px;
+            height: 30px;
+            margin-left: 40px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <textarea cols="30" rows="10" id="content" onkeydown="keySend(event);"></textarea>
+        <input type="button" value="提交">
+    </div>
+</body>
+<script>
+    //获取元素
+    var inp = document.querySelector("input");
+    var text = document.getElementById("content");
+    var wrap = document.querySelector(".wrap");
+    //点击事件
+    function keySend(event) {
+        if (event.ctrlKey && event.keyCode == 13) {
+            insert();
+        }
+    }
+    inp.onclick = function () {
+        insert();
+    }
+    function insert() {
+        //当文本框中输入不为空时
+        if (text.value != "") {
+            console.log(text.value);
+            //创建一个对话框
+            var dialog = document.createElement("div");
+            //为对话框设置样式
+            dialog.style.width = "85%";
+            dialog.style.border = "3px solid pink";
+            dialog.style.backgroundColor = "#A3DAC1";
+            dialog.style.marginLeft = "40px";
+            dialog.style.marginTop = "10px";
+            dialog.style.position = "relative";
+            dialog.style.borderRadius = "5px";
+            //设置换行,中文是默认可以换行的,英文需要设置
+            dialog.style.wordWrap = "break-word"
+            dialog.style.padding = "20px";
+            //将对话框添加到wrap的子级中
+            wrap.appendChild(dialog);
+
+            //将获取到的value添加到对话框中
+            dialog.innerHTML += text.value;
+            //将value置空
+            text.value = "";
+        }
+    }
+</script>
+
+</html>

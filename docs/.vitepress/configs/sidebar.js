@@ -5,8 +5,9 @@ module.exports = {
   [getPath('/css/')]: getCssSidebar(),
   [getPath('/js/')]: getJsSidebar(),
   [getPath('/框架/')]: getLibrarySidebar(),
-  [getPath('/笔试、面试题汇总')]: getTestSidebar(),
   [getPath('/常见需求、demo')]: getDemoSidebar(),
+  [getPath('/笔试/')]: getBiShiSidebar(),
+  [getPath('/面经/')]: getMianJingSidebar(),
 }
 
 function getHtmlSidebar() {
@@ -93,14 +94,28 @@ function getLibrarySidebar() {
   ]
 }
 
-function getTestSidebar() {
+function getBiShiSidebar(){
   return [
     {
-      text: '笔试、面试题汇总',
+      text: '笔试',
       children: [
         {
-          text: '4399',
-          link: '/笔试、面试题汇总/4399'
+          text: '笔试',
+          link: '/笔试/index'
+        },
+      ]
+    }
+  ]
+}
+
+function getMianJingSidebar(){
+  return [
+    {
+      text: '面经',
+      children: [
+        {
+          text: '面经',
+          link: '/面经/index'
         },
       ]
     }
