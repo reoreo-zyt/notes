@@ -9,6 +9,11 @@ let vm = new Vue({
             classNum: 1,
             total: 2,
             teachers: ['张三', '李四'],
+            info: {
+                a: {
+                    b: 1,
+                },
+            },
             students: [
                 {
                     id: 1,
@@ -23,4 +28,4 @@ let vm = new Vue({
     }
 })
 
-console.log(vm.title);
+console.log(vm.info);

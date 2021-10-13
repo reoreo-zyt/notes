@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 导入 jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="page-header">jQuery发送Ajax请求</h2>
+        <button type="button" class="btn btn-primary">GET</button>
+        <button type="button" class="btn btn-danger">POST</button>
+        <button type="button" class="btn btn-info">通用性方法 Ajax</button>
+    </div>
+    <script>
+        // 1. get 请求
+        $("button").eq(0).click(() => {
+            $.get("http://127.0.0.1:8000/jQuery-server", { a: 100, b: 200 }, (data) => {
+                console.log(data);// 是一个对象 {"name":"Zhong"}
+                console.log(data.name);
+            },"json")
+        });
+
+        // 2. post 请求
+        $("button").eq(1).click(() => {
+            $.post("http://127.0.0.1:8000/jQuery-server", { a: 100, b: 200 }, (data) => {
+                console.log(data);// 是一个字符串 "{"name":"Zhong"}" 
+            })
+        });
+
+        // 3. 通用方法
+        $("button").eq(2).click(()=>{
+            $.ajax({
+                // url
+                url:"http://127.0.0.1:8000/jQuery-server",
+                // 参数
+                data:{a:100,b:200},
+                // 请求类型
+                type:"GET",
+                // 响应体结果
+                dataType:"json",
+                // 成功地回调函数
+                success:(data)=>{
+                    console.log(data);
+                },
+                // 超时时间
+                timeout: 2000,
+                // 失败的回调
+                error:()=>{
+                    console.log("出错了！");
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

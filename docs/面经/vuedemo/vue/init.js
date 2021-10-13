@@ -1,4 +1,5 @@
-import proxyData from "./proxy";
+import proxyData from './proxy';
+import observe from './observe';
 
 function initState(vm){
     var options = vm.$options;
@@ -19,6 +20,8 @@ function initData(vm){
     for(var key in data){
         proxyData(vm,'_data',key);
     }
+
+    observe(vm._data);
 }
 
 export {

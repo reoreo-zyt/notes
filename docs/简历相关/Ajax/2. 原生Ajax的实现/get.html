@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 400px;
+            height: 200px;
+            border: solid 1px aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <button>按钮</button>
+    <div id="container"></div>
+    <script>
+        const btn = document.getElementsByTagName("button")[0];
+        btn.onclick = function(){
+            // 实现 Ajax
+            // 1. 创建 XHR 对象
+            let xhr = new XMLHttpRequest();
+            // 2. 初始化 （设置请求方法和 url）
+            xhr.open("GET","http://127.0.0.1:8000/server");
+            // 3. 发送
+            xhr.send();
+            // 4. 事件绑定 处理服务器返回的结果
+            // 当状态改变时会触发事件
+            xhr.onreadystatechange = function(){
+                // readyState 是 XHR 对象的属性，保存0,1,2,3,4值，当值改变时会触发改事件
+                // 值状态分别对应 未初始化|已初始化|已发送|服务端返回部分结果|服务端返回全部结果
+                if(xhr.readyState === 4){
+                    // status 是 XHR 对象属性，对应响应状态码
+                    if(xhr.status >= 200 && xhr.status < 300){
+                        // 处理结果
+                        // 响应体
+                        console.log(xhr.status);// 200
+                        console.log(xhr.statusText);// ok
+                        console.log(xhr.getAllResponseHeaders());// content-length: 0
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -310,6 +310,98 @@ new Promise(resolve => {
     * node 和 浏览器 eventLoop的主要区别
       * 浏览器中的微任务是在每个相应的宏任务中执行的，而nodejs中的微任务是在不同阶段之间执行的。
 
+#### 4. 跨域
+
+[10种跨域解决方案（附终极大招）](https://juejin.cn/post/6844904126246027278#heading-5)
+[反向代理和正向代理区别](https://www.cnblogs.com/taostaryu/p/10547132.html)
+
+* 什么是同源？
+
+同源是指"协议+域名+端口"三者相同。
+
+* 为什么要有同源？
+
+如果缺少了同源策略，浏览器很容易受到XSS、CSRF等攻击。
+
+* 同源策略限制的内容有？
+
+Cookie LocalStorage IndexedDB 等存储性内容；
+DOM节点；
+Ajax请求被浏览器拦截；
+
+* 允许跨域加载资源的标签？
+
+`img`
+`link`
+`script`
+
+* 解决方案
+  * Cors 跨域资源共享
+    * 设置额外的 Http 请求头允许跨域请求；
+    * 有简单请求和复杂请求
+      * 简单请求
+        * get post
+        * ...
+      * 复杂请求
+        * 会预先发出 options 请求（预检请求，发送一个试探请求验证是否可以和服务器跨域通信）；
+  * node 正向代理
+    * 利用服务端请求不会跨域
+    * devServer proxy（webpack）
+  * nginx 反向代理
+    * proxy_pass（nginx.conf）
+  * JSONP 
+    * 主要就是利用了 script 标签没有跨域限制
+    * 仅支持 GET 方法
+    * 方式
+      * 前端定义解析函数（例如 jsonpCallback=function(){....}）
+      * 通过 params 形式包装请求参数，并且声明执行函数(例如 cb=jsonpCallback)（/api/jsonp?msg=hello&cb=jsonpCallback）
+      * 后端获取前端声明的执行函数（jsonpCallback），并以带上参数并调用执行函数的方式传递给前端。
+  * webScoket 持久连接
+
+#### 5. http 状态码
+
+[搞懂 HTTP 重定向 - 如何优雅地使用 301](https://juejin.cn/post/6901246149802328078)
+
+1XX 临时响应
+2XX 成功处理
+3XX 重定向
+4XX 客户端请求错误
+5XX 服务器错误
+
+常见状态码：
+
+* 200 成功处理，并返回资源
+* 204 成功处理，但没有返回资源
+* 301 永久重定向
+* 302 临时性重定向（访问baidu.cn 返回302）
+* 304 服务端资源未修改，直接使用客户端未过期的缓存
+![缓存](https://camo.githubusercontent.com/24d6e4fcfb4b4a51cb03cfb67695e9ba4c5e413530b2bda2a4749b412293c960/687474703a2f2f70332e7168696d672e636f6d2f743031636533326164386561623934356138372e706e67)
+* 400 客户端请求有语法错误
+* 401 未授权，请求需要用户验证
+* 403 请求资源的访问被服务器拒绝
+* 404 无法找到请求资源
+* 500 服务端在执行请求时发生错误
+* 503 服务端在停机维护
+
+#### 6. 常见正则面试题
+
+请写出一个正则来处理数字千分位，如12345替换为12,345
+
+```js
+// 非正则
+let str = '123456789.123';
+
+console.log(parseFloat(str).toLocaleString(undefined, { maximumFractionDigits: 3 }));
+
+function formatNumber(num) {
+    num = num.toString()
+    let reg = num.indexOf('.') > -1 ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(\d{3})+$)/g
+    return num.replace(reg, '$1,')
+}
+
+console.log(formatNumber(123456789));
+```
+
 ### 1. 面经
 
 #### 1.1 为什么要有进程和线程
@@ -431,7 +523,139 @@ nodejs可以支持高并发；（js事件循环）
 
 #### 1.8 数据劫持怎么实现
 
+[「查漏补缺」Vue2.0 源码重写『数据劫持』【面试必备】](https://juejin.cn/post/6882210480040263693)
+
 * 数据劫持的目的：
 
 不仅仅简单的改变数据，在数据变化的时候进行拦截，让视图也绑定上改变的数据；
+
+// TODO: 
+
+#### 1.9 箭头函数能不能当作构造函数，为什么
+
+[详解箭头函数和普通函数的区别以及箭头函数的注意事项、不适用场景](https://juejin.cn/post/6844903801799835655)
+[重学 JS | 箭头函数为什么不能用做构造函数？](https://juejin.cn/post/6973181948327903245)
+
+* 箭头函数没有 prototype；
+* 箭头函数的 this 继承自第一个外层函数的this，如果没有，this指向window；
+
+为什么不能当做构造函数？
+
+* 构造函数生成实例需要 new 关键字；
+* new 关键字做了什么？
+  * 创建空对象p `var p = {}`
+  * 将空对象p的原型链指向构造器 Person 的原型 `p.__proto__ = Person.prototype`
+  * 将Person()构造函数中的this指向p `Person.call(p)`
+
+> 箭头函数没有prototype。因此不能使用箭头作为构造函数，也就不能通过new操作符来调用箭头函数。
+
+#### 1.10 localStorage有没有同源限制?
+
+#### 1.11 CSRF攻击?
+
+#### 1.12 登录验证怎么做的？
+
+[傻傻分不清之 Cookie、Session、Token、JWT](https://juejin.cn/post/6844904034181070861)
+
+说明 api 的编写过程
+
+* 代码规范
+  * ESLint Prettier
+* 日志记录
+  * winston morgan （作为中间件引入 app.ts）
+* mongoose 连接数据库
+* CRUD 逻辑分层
+  * models层 对应数据库实体层（对应mongodb数据库的集合）
+  * service层 用来完成主要的功能设计，比如注册、登录
+  * controller层 请求和响应控制
+* 使用 bcrypt 避免密码明文存储
+
+登录验证的过程：
+
+说明cookies sessions token 然后使用了jwt
+
+* 创建用户和验证登录都返回用户的 id 还有 jwt token(使用 jsonwebtoken 库生成)
+* 使用创建 token 的私钥和提取请求头 Authorization Bearer token验证，如果发生错误，则意味着无法通过私钥解密；
+
+#### 1.13 路由组件怎么缓存
+
+keep-alive
+
+缓存全部路由，把router-view用keep-alive包裹起来
+缓存部分路由，在路由里配置meta对象，定义一个布尔值keepAlive，使用$route.meta.keepAlive决定是否缓存
+
+> 切换路由链接时，前一个路由组件对象会被销毁掉，下次切换回来时，又是一个新的路由组件对象
+
+#### 1.14 computed和data区别
+
+computed 是计算属性，计算后的属性值有缓存，data里的数据通过插值表达式计算会重复计算；
+
+#### 1.15 cookie和session区别
+
+* 安全性：session比cookie安全，session是存在服务端的，cookie暴露在浏览器内部；
+* 存取值类型不同：cookie只能存取字符串，session可以存取任意类型数据；
+* 有效期不同：Cookie可以设置长时间保存；
+* 存储大小不同：单个 Cookie 保存的数据不能超过 4K，Session 可存储数据远高于 Cookie，但是当访问量过多，会占用过多的服务器资源。
+
+#### 1.16 怎么禁止前端使用cookie
+
+[浅谈Js 操作Cookie，以及HttpOnly 的限制](https://zhuanlan.zhihu.com/p/36197012)
+
+一般来说，只有服务器操作 Cookie 才能保证一些必要的安全。设置HttpOnly限制前端获取到cookie值
+当使用document.cookie时会自动过滤掉有httpOnly的cookie值
+
+#### 1.17 怎么实时刷新列表
+
+* 定义一个定时器 setInterval
+* 在组件销毁后清除定时器；
+
+```js
+data(){    
+    return {      
+        timer:0    
+    };  
+},  
+mounted(){    
+    if(this.timer){      
+        clearInterval(this.timer)    
+    }else{      
+        this.timer = setInterval(()=>{       
+         // 调用相应的接口，渲染数据        
+        console.log('hello')      
+        },30000)    
+    }  
+},  
+destroyed(){    
+    clearInterval(this.timer)  
+},
+```
+
+#### 1.18 websocket
+
+[WebSocket 教程](https://www.ruanyifeng.com/blog/2017/05/websocket.html)
+[WebSocket 原理浅析与实现简单聊天](https://juejin.cn/post/6844904001654226958#heading-0)
+
+* 轮询
+
+短轮询（Polling）：
+浏览器端每隔几秒钟向服务器端发送 HTTP 请求
+
+长轮询（Long-Polling）：
+客户端发送请求后服务器端不会立即返回数据，服务器端会阻塞请求连接不会立即断开，直到服务器端有数据更新或者是连接超时才返回
+
+* 什么是websocket?
+
+是一种网络通信协议，浏览器与服务器进行全双工通讯的网络技术
+
+* 为什么需要websocket?
+
+HTTP 协议有一个缺陷：通信只能由客户端发起。做不到服务器主动向客户端推送信息。
+
+![websocket](https://www.ruanyifeng.com/blogimg/asset/2017/bg2017051502.png)
+
+* `new WebSocket('ws://localhost:9000')`
+* onopen 监听连接成功
+* onmessage 监听服务端消息(接收消息)
+* onerror  监听连接失败
+* onclose 监听连接关闭
 
