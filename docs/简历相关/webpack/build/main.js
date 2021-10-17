@@ -1,0 +1,1 @@
+(()=>{var o={815:o=>{o.exports={sayImport:function(){console.log("import")}}}},t={};function r(s){var e=t[s];if(void 0!==e)return e.exports;var n=t[s]={exports:{}};return o[s](n,n.exports,r),n.exports}(()=>{const{sayImport:o}=r(815);new class{constructor(o,t){this.name=o,this.job=t}getNameAndJob(){console.log(this.name+this.job)}}("Zhong","前端").getNameAndJob(),o()})()})();
