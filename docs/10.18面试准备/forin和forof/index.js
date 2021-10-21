@@ -5,7 +5,11 @@ for (var prop in obj) {
   console.log("obj." + prop + " = " + obj[prop]);
 }
 
-for (let value of nums) {
+function a(a,b) {
+  return arguments;
+}
+
+for (let value of a(1,2)) {
   console.log(value);
 }
 

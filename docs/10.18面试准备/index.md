@@ -52,21 +52,21 @@ websocket 是浏览器和服务器进行全双工通讯的网络通信协议；
 
 ## 5. 怎么记录用户的登录状态
 
-博客后台使用的是token验证授权，注册和登录都会但会一个jwt
+博客后台使用的是token验证授权，注册和登录都会但会返回一个jwt
 
 * 前端调后端的登陆接口，发送用户名和密码；
 * 后端收到请求，验证用户名和密码（密码不是明文的），验证成功，就给前端返回一个token；
 * 前端拿到token，将token存储到vuex中，用了vuex的一个插件，在存储vuex数据时，也会存在localStorage中，然后跳转路由页面；
-* 每次跳转路由，就判断 localStorage 中有无 token ，没有就跳转到登录页面，有则跳转到对应路由页面；
-* 调后端接口，都要在请求头中加上Authorization Bearer token；
+* 调后端接口axios请求拦截，在请求头中加上Authorization Bearer token；
 * 后端判断请求头中有无token，有token，就拿到token并验证token，验证成功就返回数据，验证失败（例如：token过期）就返回401，请求头中没有token也返回401；
 * 如果前端拿到状态码为401，就清除token信息并跳转到登录页面；
 * 调取登录接口成功，会在回调函数中将token存储到vuex中，也存到localStorage；
 
-
 ## 6. 图片优化
 
 [实现图片懒加载(Lazyload)](https://juejin.cn/post/6844903455048335368)
+
+压缩（70%）
 
 图片懒加载：
 利用data-src定义真正的图片链接，监听滚动事件，当用户滚动到看到的图片时，将data-src的值赋给src。
@@ -117,7 +117,9 @@ function lazyload(event) {
 window.addEventListener('scroll',throttle(lazyload,500,1000));
 ```
 
-压缩
+- 借助了闭包的特性来缓存变量（状态）
+  - 闭包需要理解作用域和执行上下文；
+- 都可以使用 setTimeout 实现
 
 ## 7. 事件委托
 
@@ -130,8 +132,6 @@ window.addEventListener('scroll',throttle(lazyload,500,1000));
 不使用事件委托：
 * 给每一个列表都绑定相同事件，浪费内存；
 * 动态添加元素时，需要重新绑定事件；
-
-> 引出浏览器回流和重绘的概念；性能更好
 
 
 用父级元素做委托
@@ -161,9 +161,6 @@ script 标签的两个属性defer、async
 * async 脚本可能会在DOMContentLoaded事件执行前后触发；（看async脚本什么时候加载完，只有加载完才会执行阻塞html解析）
 * defer脚本会延迟到html解析完后才会执行；
 
-> 可以说一下浏览器的回流、重绘；
-
-
 ## 9. for in 和 for of
 
 for in是为遍历对象属性而构建的，不建议与数组一起使用；
@@ -173,6 +170,7 @@ for in是为遍历对象属性而构建的，不建议与数组一起使用；
 for of是ES6的语法，用于迭代可迭代对象，比如Array、String；
 
 ## 10. 怎么把arguments转换成数组
+
 [类数组转换为数组的方法](https://juejin.cn/post/6948726526812618765)
 
 函数里有个类数组对象 arguments，该对象包含索引和实参；很简单，遍历取值push进定义的空数组就好了。
@@ -180,6 +178,8 @@ for of是ES6的语法，用于迭代可迭代对象，比如Array、String；
 ```js
 [Arguments] { '0': 1, '1': 2 }
 ```
+
+for of 遍历，定义空数组，push进去；
 
 使用数组的slice方法：
 
@@ -265,7 +265,6 @@ watch监听的数据是简单数据类型时，就比较值，值不一样则触
 * $attrs （在子组件使用v-bind='$attrs'可以在孙组件那里得到）/ $listeners
 * $root
 
-
 ## 15. CSRF 以及如何防范？
 
 ## 16. 说下操作系统中页面调度算法
@@ -347,3 +346,4 @@ var a = new F()//报错
 ## 37. 权限系统
 
 ## 38. 具体细化的组件如何做权限
+
